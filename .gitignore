@@ -1,2 +1,4 @@
-!config/**.md
+/config/passport.js
+/config/db.js
+/config/session.js
 /node_modules/
