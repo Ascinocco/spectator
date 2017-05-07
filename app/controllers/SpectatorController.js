@@ -4,7 +4,8 @@ var SpectatorController = (function(){
 
     var index = function (req, res, next) {
         res.render('app', {
-            title: 'Spectator'
+            title: 'Spectator',
+            loadBundle: true // needed for loading the vue js app
         });
     }
 
