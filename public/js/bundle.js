@@ -3883,7 +3883,8 @@ window.axios.defaults.headers.common = {
 var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_1__components_Dashboard_vue___default.a }, { path: '/settings', component: __WEBPACK_IMPORTED_MODULE_2__components_Settings_vue___default.a }];
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
-    routes: routes
+    routes: routes,
+    linkActiveClass: 'active'
 }));
 
 /***/ }),
