@@ -5,16 +5,16 @@ var IndexController = require('../controllers/IndexController');
 var AuthMiddleware = require('../middleware/AuthMiddleware');
 
 /* GET home page. */
-router.get('/', IndexController.index);
+router.get('/', AuthMiddleware.redirectToApp, IndexController.index);
 
-router.get('/login', IndexController.login);
+router.get('/login', AuthMiddleware.redirectToApp, IndexController.login);
 router.post('/login', passport.authenticate('local-login', {
     successRedirect: '/app',
     failureRedirect: '/login',
     failureFlash: true
 }));
 
-router.get('/register', IndexController.register);
+router.get('/register', AuthMiddleware.redirectToApp, IndexController.register);
 router.post('/register', passport.authenticate('local-signup', {
     successRedirect: '/app',
     failureRedirect: '/register',

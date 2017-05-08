@@ -7,8 +7,17 @@ var AuthMiddleware = (function(){
         res.redirect('/');
     }
 
+    var redirectToApp = function (req, res, next) {
+       if (req.user) {
+           res.redirect('/app');
+       }
+
+       return next();
+    }
+
     return {
-        handle: handle
+        handle: handle,
+        redirectToApp: redirectToApp
     }
 })();
 
