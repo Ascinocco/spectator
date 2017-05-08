@@ -53,7 +53,7 @@ app.use(flash());
 
 app.use('/', index);
 app.use('/app', spectator);
-app.user('/user', user);
+app.use('/user', user);
 
 require('./config/passport')(passport);
 

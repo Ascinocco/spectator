@@ -1,11 +1,11 @@
 import VueRouter from 'vue-router';
 
 import Dashboard from './components/Dashboard.vue';
-import Settings from './components/Settings.vue';
+import Profile from './components/Profile.vue';
 
 let routes = [
     { path: '/', component: Dashboard },
-    { path: '/settings', component: Settings }
+    { path: '/profile', component: Profile }
 ];
 
 export default new VueRouter({

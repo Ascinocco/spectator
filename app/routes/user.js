@@ -6,6 +6,7 @@ var AuthMiddleware = require('../middleware/AuthMiddleware');
 
 router.use(AuthMiddleware.handle);
 
-router.get('/', SpectatorController.index);
+router.get('/', UserController.index);
+router.post('/store', UserController.store);
 
 module.exports = router;
