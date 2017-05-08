@@ -25,6 +25,8 @@ mongoose.connect(dbConfig.url, function(err) {
 
 var index = require('./app/routes/index');
 var spectator = require('./app/routes/spectator');
+var user = require('./app/routes/user');
+
 var app = express();
 
 // view engine setup
@@ -51,6 +53,7 @@ app.use(flash());
 
 app.use('/', index);
 app.use('/app', spectator);
+app.user('/user', user);
 
 require('./config/passport')(passport);
 
