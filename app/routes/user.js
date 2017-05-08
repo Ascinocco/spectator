@@ -7,6 +7,6 @@ var AuthMiddleware = require('../middleware/AuthMiddleware');
 router.use(AuthMiddleware.handle);
 
 router.get('/', UserController.index);
-router.post('/store', UserController.store);
+router.post('/store', UserController.update);
 
 module.exports = router;

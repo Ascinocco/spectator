@@ -4744,7 +4744,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 new Vue({
     el: '#spectatorApp',
-
     router: __WEBPACK_IMPORTED_MODULE_1__routes__["a" /* default */]
 });
 

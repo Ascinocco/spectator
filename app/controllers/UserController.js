@@ -11,7 +11,7 @@ var UserController = (function(){
         });
     }
 
-    var store = function (req, res, next) {
+    var update = function (req, res, next) {
         var user = {
             name: req.user.name,
             email: req.user.email
