@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+var mkdirp = require('mkdirp');
+var moment = require('moment');
+var fs = require('fs');
 
 var deploymentSchema = mongoose.Schema({
     userId:       { type: String, required: true },
@@ -13,8 +16,8 @@ var deploymentSchema = mongoose.Schema({
                                 fileName: { type: String, default: 'docker-compose.yml', required: true },
                                 description: String,
                                 path: {type: String, default: '', required: true},
-                                createdAt: { type: Date, defaulte: Date.now, required: true },
-                                updatedAt: { type: Date, defaulte: Date.now, required: true }
+                                createdAt: { type: Date, default: Date.now, required: true },
+                                updatedAt: { type: Date, default: Date.now, required: true }
                             }
                         ],
     dockerFiles:        [
@@ -23,8 +26,8 @@ var deploymentSchema = mongoose.Schema({
                                 fileName: { type: String, default: 'Dockerfile', required: true },
                                 description: String,
                                 path: {type: String, default: '', required: true},
-                                createdAt: { type: Date, defaulte: Date.now, required: true },
-                                updatedAt: { type: Date, defaulte: Date.now, required: true }
+                                createdAt: { type: Date, default: Date.now, required: true },
+                                updatedAt: { type: Date, default: Date.now, required: true }
                             }
                         ],
     
@@ -64,15 +67,61 @@ deploymentSchema.statics.createDeployment = function (data, user, callback) {
         }
 
         if (data.dockerComposeYml) {
-            newDep.dockerComposeYmls.push(data.dockerComposeYml);
-            // save file to disk
+
+            var filePath = './storage' + user.storageDir + '/' 
+                + 'docker-compose-ymls' + '/'
+                + moment().format().toString() + '/' 
+                + data.dockerComposeYml.fileName;
+            
+            var fileName = data.dockerComposeYml.fileName;
+
+            var ymlData = {
+                helpfulName: data.dockerComposeYml.helpfulName,
+                fileName: data.dockerComposeYml.fileName,
+                description: data.dockerComposeYml.description,
+                path: filePath
+            };
+
+            newDep.dockerComposeYmls.push(ymlData);
+
+            fs.writeFile(filePath, data.dockerComposeYml.file, function(err) {
+                if (err) {
+                    return console.error(err);
+                }
+
+                console.log('docker-compose file saved');
+            });
+
         } else {
             newDep.dockerComposeYmls = [];
         }
 
         if (data.dockerFile) {
-            newDep.dockerFiles.push(data.dockerFile);
-            // save file to disk
+            
+            var filePath = './storage' + user.storageDir + '/' 
+                + 'dockerfiles' + '/'
+                + moment().format().toString() + '/' 
+                + data.dockerFile.fileName;
+                        
+                var fileName = data.dockerFile.fileName;
+
+                var ymlData = {
+                    helpfulName: data.dockerFile.helpfulName,
+                    fileName: data.dockerFile.fileName,
+                    description: data.dockerFile.description,
+                    path: filePath
+                };
+
+                newDep.dockerFile.push(ymlData);
+
+                fs.writeFile(filePath, data.dockerFile.file, function(err) {
+                    if (err) {
+                        return console.error(err);
+                    }
+
+                    console.log('dockerfile file saved');
+                });
+
         } else {
             newDep.dockerFiles = [];
         }
