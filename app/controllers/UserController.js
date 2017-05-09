@@ -51,7 +51,7 @@ var UserController = (function(){
 
     return {
         index: index,
-        store: store
+        update: update
     }
 
 })();

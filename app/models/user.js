@@ -9,8 +9,8 @@ var userSchema = mongoose.Schema({
     storageDir: { type: String, required: true }, //storage directory for docker files and what not
     deployemnets: [],
 
-    createdAt: { type: Date, defaulte: Date.now, required: true },
-    updatedAt: { type: Date, defaulte: Date.now, required: true }
+    createdAt: { type: Date, default: Date.now, required: true },
+    updatedAt: { type: Date, default: Date.now, required: true }
 });
 
 userSchema.methods.generateHash = function (password) {
@@ -22,9 +22,24 @@ userSchema.methods.validPassword = function (password) {
 };
 
 userSchema.methods.createStorageDirectory = function(callback) {
-    var dockerFileDir = '/storage/' + this._id.toString() + '/dockerfiles';
+    var baseDir = './storage';
+    this.storageDir = '/' + this._id.toString();
+
+    var dockerFileDir = baseDir + this.storageDir + '/dockerfiles';
+    var dockerComposeDir = baseDir + this.storageDir + '/docker-compose-ymls';
+    
     mkdirp(dockerFileDir, function (err) {
-        
+        if (err) {
+            callback(err, null);
+        }
+
+        mkdirp(dockerComposeDir, function (err) {
+            if (err) {
+                callback(err, null);
+            }
+
+            callback(null, true);
+        });
     });
 };
 

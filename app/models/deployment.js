@@ -30,8 +30,8 @@ var deploymentSchema = mongoose.Schema({
     
     settings:           [],
 
-    createdAt: { type: Date, defaulte: Date.now, required: true },
-    updatedAt: { type: Date, defaulte: Date.now, required: true }
+    createdAt: { type: Date, default: Date.now, required: true },
+    updatedAt: { type: Date, default: Date.now, required: true }
 
 });
 
