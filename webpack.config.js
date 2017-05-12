@@ -3,13 +3,10 @@ var babel = require('babel-core');
 var path = require('path');
 
 module.exports = {
-    entry: {
-        app: './app/resources/js/spectator/app.js',
-        landing: './app/resources/js/landing/app'
-    },
+    entry: './app/resources/js/app.js',
     output: {
         path: path.resolve(__dirname, 'public/js'),
-        filename: '[name].bundle.js',
+        filename: 'bundle.js',
         publicPath: './public/'
     },
 
