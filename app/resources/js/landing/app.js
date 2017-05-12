@@ -1,8 +1,7 @@
-
-import './bootstrap';
+import '../bootstrap';
 import router from './routes';
 
 new Vue({
-    el: '#spectatorApp',
+    el: '#landingApp',
     router
 });
